@@ -1,0 +1,43 @@
+<h2>Confirm Attendance – {{ subject }}</h2>
+
+<form method="POST" action="/finalize_attendance">
+
+  {% for student in students %}
+    <input type="checkbox" name="students" value="{{ student }}" checked>
+    {{ student }}<br>
+  {% endfor %}
+
+  <hr>
+
+  <label>Add student manually:</label>
+  <input type="text" id="manual_name">
+  <button type="button" onclick="addStudent()">Add</button>
+
+  <br><br>
+  <button type="submit">✅ YES, Confirm Attendance</button>
+</form>
+
+<script>
+function addStudent() {
+    let name = document.getElementById("manual_name").value;
+    if (!name) return;
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "students";
+    checkbox.value = name;
+    checkbox.checked = true;
+
+    document.forms[0].insertBefore(checkbox, document.forms[0].lastElementChild);
+    document.forms[0].insertBefore(
+        document.createTextNode(" " + name),
+        document.forms[0].lastElementChild
+    );
+    document.forms[0].insertBefore(
+        document.createElement("br"),
+        document.forms[0].lastElementChild
+    );
+
+    document.getElementById("manual_name").value = "";
+}
+</script>

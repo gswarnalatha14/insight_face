@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+  <h2 class="page-title">All Classes</h2>
+  <p class="page-subtitle">Select a class to take attendance</p>
+
+  {% if classes|length == 0 %}
+    <p style="color:red;">No classes available.</p>
+  {% endif %}
+
+  <div class="class-grid">
+
+    {% for cls in classes %}
+    <div class="class-card">
+
+      <!-- SUBJECT -->
+      <h3 class="subject-name">
+        {{ cls.subject }}
+
+        {% if "LAB" in cls.subject %}
+          <span class="lab-badge">LAB</span>
+        {% endif %}
+      </h3>
+
+      <!-- TEACHER NAME -->
+      <p class="teacher-name">
+        <strong>Teacher:</strong> {{ cls.teacher_name }}
+      </p>
+
+      <!-- ROOM -->
+      <p class="class-room">
+        <strong>Room:</strong> {{ cls.room }}
+      </p>
+
+      <!-- TAKE ATTENDANCE -->
+      <a href="{{ url_for('live_attendance', class_id=cls._id) }}"
+         class="take-btn">
+         Take Attendance
+      </a>
+
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<style>
+.dashboard-container {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.page-subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.class-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.subject-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-badge {
+  background: #f97316;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.teacher-name,
+.class-room {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.take-btn {
+  display: inline-block;
+  background: #22c55e;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.take-btn:hover {
+  background: #16a34a;
+}
+</style>
+
+{% endblock %}

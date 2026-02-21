@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title">Weekly Timetable</h2>
+
+<div class="timetable-wrapper">
+<table class="timetable">
+    <thead>
+        <tr>
+            <th>Day</th>
+            {% for slot in time_slots %}
+                <th>{{ slot }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for day, cells in grid.items() %}
+        <tr>
+            <td class="day-cell">{{ day }}</td>
+
+            {% for cell in cells %}
+                {% if cell.type == "break" %}
+                    <td class="break-cell">BREAK</td>
+
+                {% elif cell.type == "lunch" %}
+                    <td class="lunch-cell">LUNCH</td>
+
+                {% elif cell.type == "class" %}
+                    <td class="subject-cell {% if 'LAB' in cell.label %}lab{% endif %}"
+                        colspan="{{ cell.colspan }}">
+                        {{ cell.label }}
+                    </td>
+
+                {% else %}
+                    <td class="empty-cell"></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}
