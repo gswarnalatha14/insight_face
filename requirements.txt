@@ -1,0 +1,11 @@
+Flask
+flask-pymongo
+pymongo
+gunicorn
+numpy
+opencv-python-headless
+pillow 
+scikit-learn
+tensorflow
+insightface 
+onnxruntime
