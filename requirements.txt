@@ -6,6 +6,6 @@ numpy
 opencv-python-headless
 pillow 
 scikit-learn
-tensorflow
+tensorflow-cpu==2.15.0
 insightface 
 onnxruntime
