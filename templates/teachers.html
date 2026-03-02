@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Teachers</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Teacher Name</th>
+      <th>Section</th>
+      <th>Classes Taken</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for t in teachers %}
+    <tr>
+      <td>{{ t.name }}</td>
+      <td>{{ t.section }}</td>
+      <td>
+        <span class="badge badge-success">
+          {{ t.classes_taken }}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

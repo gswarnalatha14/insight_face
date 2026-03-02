@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Attendance Summary</h2>
+
+<h3>Subject: {{ subject }}</h3>
+
+<h4>Present Students</h4>
+<ul>
+  {% for s in present_students %}
+    <li>{{ s.student_name }}</li>
+  {% endfor %}
+</ul>
+
+<a href="/dashboard">Back to Dashboard</a>
+
+{% endblock %}
